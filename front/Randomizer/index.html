@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>RANDOMIZER</title>
     <script src="js/main.js" defer></script>
     <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
     <div class="container">
         <header class="main-header">
@@ -19,9 +21,9 @@
                 <p class="main-header-menu-desc">Генератор случайных вариантов из различных категорий </p>
                 <nav class="main-header-menu-nav">
                     <ul class="nav-list">
-<!--                        <li class="nav-item-1">Категории:</li>-->
+                        <!--                        <li class="nav-item-1">Категории:</li>-->
                         <li class="nav-item"><a href="#" class="nav-item-link">Фильм</a></li>
-                        <li class="nav-item"><a href="#" class="nav-item-link">Поздравление</a></li>
+                        <li class="nav-item"><a href="#" class="nav-item-link btn_go">Поздравление</a></li>
                         <li class="nav-item"><a href="#" class="nav-item-link">Кулинарный рецепт</a></li>
                         <li class="nav-item"><a href="#" class="nav-item-link">Произведение искусства</a></li>
                         <li class="nav-item"><a href="#" class="nav-item-link">Ещё</a></li>
@@ -30,28 +32,23 @@
             </div>
         </header>
         <main>
-        <section class="main-block">
-<!--            <div class="main-block-free"></div>-->
-            <div class="main-block-data">
-                <p class="main-block-data-menu">Ваша случайность из категории:<span class="cat-sel">Фильм</span><span class="cat-settings">Настроить фильтр</span><span class="next-random">Следующая случайность</span></p>
-                <div class="main-block-data-primary">
-                    <div class="main-block-data-pic"><img src="img/films/film-001.jpg" width="276" height="415"></div>
-                    <div class="main-block-data-text">
-                        <h1 class="film-title">«Мотылёк»</h1>
-                        <p class="film-info">2017, триллер, драма, Чехия.</p>
-                        <p class="film-desc">Книга сбежавшего из колонии Анри Шарьера, хоть и основана на реальных событиях,
-часто вызывала сомнения в правдивости. В 70-х по ней уже сняли фильм
-со Стивом МакКуином и Дастином Хоффманом.
-Новая версия объединила на экране звезд сериала «Сыны анархии» Томми Флэнагана
-и Чарли Ханнэма и еще раз задала вопрос: что стоит человеку,
-цинично уклонявшегося от правосудия, соврать на пару сотен страниц?</p>
-                        <p class="film-desc">В главных ролях: Чарли Ханнэм, Рами Малек, Роланд Мюллер, Йоэль Басман,
-Йорик ван Вагенинген, Майкл Сока, Кристофер Фэйрбэнк, Ив Хьюсон, Томми Флэнаган.</p>
-                        <p class="film-desc">Режиссёр: Михаэль Ноер.</p>
+            <section class="main-block">
+                <!--            <div class="main-block-free"></div>-->
+                <div class="main-block-data">
+                    <p class="main-block-data-menu">Ваша случайность из категории:<span class="cat-sel">Фильм</span><span class="cat-settings">Настроить фильтр</span><span class="next-random">Следующая случайность</span></p>
+                    <div class="main-block-data-primary">
+                        <div class="main-block-data-pic"><img src="img/films/film-001.jpg" width="276" height="415"></div>
+                        <div class="main-block-data-text">
+                            <h1 class="film-title">«Мотылёк»</h1>
+                            <p class="film-info">2017, триллер, драма, Чехия.</p>
+                            <p class="film-desc">Книга сбежавшего из колонии Анри Шарьера, хоть и основана на реальных событиях, часто вызывала сомнения в правдивости. В 70-х по ней уже сняли фильм со Стивом МакКуином и Дастином Хоффманом. Новая версия объединила на экране
+                                звезд сериала «Сыны анархии» Томми Флэнагана и Чарли Ханнэма и еще раз задала вопрос: что стоит человеку, цинично уклонявшегося от правосудия, соврать на пару сотен страниц?</p>
+                            <p class="film-desc">В главных ролях: Чарли Ханнэм, Рами Малек, Роланд Мюллер, Йоэль Басман, Йорик ван Вагенинген, Майкл Сока, Кристофер Фэйрбэнк, Ив Хьюсон, Томми Флэнаган.</p>
+                            <p class="film-desc">Режиссёр: Михаэль Ноер.</p>
+                        </div>
                     </div>
+                    <div class="other-cat">Кроме фильмов наш генератор выдаёт варианты из <a href="#" class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text">Исторический факт</a>&raquo;</div>
                 </div>
-                <div class="other-cat">Кроме фильмов наш генератор выдаёт варианты из <a href="#" class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text">Исторический факт</a>&raquo;</div>
-            </div>
             </section>
             <section class="see-now">
                 <div class="see-now-title">Просматривают сейчас <span class="see-now-count">(4 случайности из 1 348)</span></div>
@@ -84,12 +81,11 @@
                             </div>
                             <div class="see-now-text">
                                 <p class="art-title">Крик, Эдвард Мунк, 1893г.</p>
-                                <p class="art-text">Центральная фигура картины изображает фигуру человека, который обхватил руками лицо и широко раскрыл рот.
-                                Эта фигура очень примитивизирована, поэтому некоторые видят в ней некое бесполое существо, скелет, мумию или даже эмбриона.
-                                С помощью волнообразных линий художник изобразил звук крика, но непонятно, кричит ли это человек или же он в страхе и отчаянии от услышанного «крика природы», который разносится повсюду.</p>
+                                <p class="art-text">Центральная фигура картины изображает фигуру человека, который обхватил руками лицо и широко раскрыл рот. Эта фигура очень примитивизирована, поэтому некоторые видят в ней некое бесполое существо, скелет, мумию или даже
+                                    эмбриона. С помощью волнообразных линий художник изобразил звук крика, но непонятно, кричит ли это человек или же он в страхе и отчаянии от услышанного «крика природы», который разносится повсюду.</p>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </section>
         </main>
@@ -103,7 +99,7 @@
                     Каждый человек был в ситуации, когда не знаешь, как поступить, какое решение принять, что подарить, какой фильм посмотреть, куда сходить вечером и т.д
                 </p>
                 <p class="project-desc">
-                   На поиск ответа тратится так много сил и нервов, что когда решение наконец–то принято, оно уже не радует нас так сильно.
+                    На поиск ответа тратится так много сил и нервов, что когда решение наконец–то принято, оно уже не радует нас так сильно.
                 </p>
                 <p class="project-desc">
                     Сервис решает задачи выбора в нескольких направлениях: от развлечения пользователя и решения бытовых вопросов, до расширения его кругозора и личностного развития.
@@ -134,5 +130,7 @@
             </div>
         </footer>
     </div>
+    <script src="./script/comgratulate.js"></script>
 </body>
+
 </html>
