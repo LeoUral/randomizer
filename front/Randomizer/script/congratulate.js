@@ -1,16 +1,23 @@
 "use strict"
 
-let congratulateLink = document.querySelector('.data-title-link');
-let congratulateLinkMain = document.querySelector('.congratulate_main_lnk');
+
 let findings = {
+    id: 0,
     who: "",
     congratulate: "",
     number: 0,
     congrRnd: ""
 };
 
+const renderFirst = `
+<p class="main-block-data-menu">Ваша случайность из категории:<span class="cat-sel">Поздравления</span><span class="cat-settings" onclick="rendGo();" style="cursor: pointer;">Настроить фильтр</span><span class="next-random" onclick="firstRnd();" style="cursor: pointer;">Следующая случайность</span></p>
+        <div class="main-block-data-primary"></div>
+        <div class="congratulate_text"></div>
+        <div class="other-cat">Кроме поздравлений наш генератор выдаёт варианты из <a href="#" class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text">Исторический факт</a>&raquo;</div>        
+        `;
+
 const renderGo = `
-<p class="main-block-data-menu">Ваша случайность из категории:<span class="cat-sel">Поздравления</span><span class="cat-settings">Настроить фильтр</span><span class="next-random">Следующая случайность</span></p>
+<p class="main-block-data-menu">Ваша случайность из категории:<span class="cat-sel">Поздравления</span><span class="cat-settings" onclick="rendGo();" style="cursor: pointer;">Настроить фильтр</span><span class="next-random" onclick="firstRnd();" style="cursor: pointer;">Следующая случайность</span></p>
         <div class="main-block-data-primary">
             <div class="congratulate_them">
                 <div class="congratulate_him who" data-one="him">поздравить его</div>
@@ -46,7 +53,7 @@ const renderGo = `
                     <div class="another_group congr" data-two="another">прочее</div>
                 </div>
             </div>
-            <div class="comgratulate_text"></div>
+            <div class="congratulate_text"></div>
 
             <style>
                 .main-block-data-primary {
@@ -57,30 +64,27 @@ const renderGo = `
                 }
                 
                 .congratulate_them {
-                    width: 12%;
+                    width: 10%;
                     min-height: 400px;
                 }
                 
                 .congr_select_him,
                 .congr_select_her,
                 .congr_select_group {
-                    width: 200px;
                     display: flex;
                     flex-direction: column;
                     flex-wrap: nowrap;
                     justify-content: flex-start;
-                    
+                    width: 25%;
                 }
                 
                 .comgratulate_text {
-                    width: 58%;
-                    padding: 30px;
-                    box-sizing: border-box;
+                    width: 45%;                    
                 }
                 
                 .who,
                 .congr {
-                    width: 200px;
+                    width: 150px;
                     height: 30px;
                     margin: 10px;
                     text-align: left;
@@ -113,14 +117,41 @@ const renderGo = `
 `;
 
 //грузим модуль в дивы
-let btnGo = document.querySelector('.btn_go'); // кнопка пуска, загрузки, старта
-let mainBlock = document.querySelector('.main-block-data');
-btnGo.addEventListener('click', function () {
+let congratulateLink = document.querySelector('.data-title-link');
+let congratulateLinkMain = document.querySelector('.congratulate_main_lnk');
+let btnGo = document.querySelector('.btn_go'); // кнопка пуска, загрузки, старта в пробном варианте
+if (congratulateLink) {
+    runProgr(congratulateLink);
+} else if (congratulateLinkMain) {
+    runProgr(congratulateLinkMain);
+} else if (btnGo) {
+    runProgr(btnGo);
+}
+//грузим модуль Первая загрузка со случайным поздравлением
+function runProgr(event) {
+    let mainBlock = document.querySelector('.main-block-data');//место вставки
+    event.addEventListener('click', function () {
+        mainBlock.innerHTML = renderFirst;
+        congratulate.init();
+        setTimeout(firstRnd, 500);//время задержки, что бы успел выполниться callback у запроса
+    });
+};
+
+//грузим модуль с фильтром выбора поздравлений
+function rendGo() {
+    let mainBlock = document.querySelector('.main-block-data');
     mainBlock.innerHTML = renderGo;
     congratulate.init();
-});
+};
 
-
+//первое случайное поздравление и также вывод "следующая случайность"
+function firstRnd() {
+    let firstNumber = Math.floor(Math.random() * congratulate.data.length);
+    findings.id = firstNumber;
+    let firstText = congratulate.data[firstNumber].congratulate;
+    console.log(findings);
+    congratulate.renderText(firstText);
+}
 
 class Congratulate {
     constructor() {
@@ -128,10 +159,13 @@ class Congratulate {
         this.alreadyViewedIds = [];
     }
 
+    //слушаем нажатие - выбор пола, затемняем не активные кнопки
     congratulateSomeone() {
         let who = document.querySelectorAll('.who');
+
         who.forEach(function (whoBtn) {
             whoBtn.addEventListener('click', function (event) {
+
                 let whoWas = event.srcElement.dataset.one;
                 findings.who = whoWas;
                 console.log(whoWas);
@@ -170,18 +204,33 @@ class Congratulate {
         });
     }
 
+    //слушаем нажатие выбора темы поздравления
     subjectCongratulations() {
         let congr = document.querySelectorAll('.congr');
+
         congr.forEach(function (congrBtn) {
             congrBtn.addEventListener('click', function (ev) {
-                let congrWhich = ev.srcElement.dataset.two;//определяем значение класса data-two
-                findings.congratulate = congrWhich;
 
-                findings.number = Math.floor(Math.random() * 4);// добавить в базу рандомное значение         
+                findings.congratulate = ev.srcElement.dataset.two; //определяем значение класса data-two
+
+                // блок рандома и определения повторов
+                do {
+                    findings.number = Math.floor(Math.random() * 4);// добавить в базу рандомное значение  
+
+                } while (congratulate.alreadyViewedIds.includes(findings.number)); //проверяем случайность на повтор
+
+                congratulate.alreadyViewedIds = [...congratulate.alreadyViewedIds, findings.number]; // добавляем случайности в массив
+
+                console.log(congratulate.alreadyViewedIds);
+
+                if (congratulate.alreadyViewedIds.length >= 4) {
+                    congratulate.alreadyViewedIds = []; //сбрасываем массив случайностей
+                } // блок определения повторов закончен
 
                 console.log(findings.congratulate + " " + findings.number);
                 console.log(findings);
 
+                //в объект findings помещаем случайное поздравление согалсно фильтра отбора
                 for (let i = 0; i < congratulate.data.length; i++) {
                     if (congratulate.data[i].who === findings.who && congratulate.data[i].theme === findings.congratulate && congratulate.data[i].randomId === findings.number) {
                         findings.congrRnd = congratulate.data[i].congratulate;
@@ -189,12 +238,46 @@ class Congratulate {
                         console.log(this.data);
                         console.log(findings.congrRnd);
 
-                        //рендер поздравления
-                        let position = document.querySelector('.comgratulate_text');
-                        position.innerHTML = findings.congrRnd;
+                        // //рендер поздравления
+                        // let position = document.querySelector('.congratulate_text');
+                        // position.innerHTML = findings.congrRnd;
+
+                        congratulate.renderText(findings.congrRnd);
                     }
                 };
             });
+        });
+    }
+
+    //рендер поздравления
+    renderText(event) {
+        let position = document.querySelector('.congratulate_text');
+        position.innerHTML = event;
+    }
+
+    //Функция AJAX получения рандомного 
+    getRndCongratulate() {
+        $.post({
+            url: '/index.php',
+            data: {
+                apiMethod: 'getRndCongratulate',
+                postData: {
+                    // id: findings.id, //он нежун только для первых случайных поздравлений.
+                    who: findings.who,
+                    theme: findings.congratulate,
+                    randomId: findings.number,
+                    congratulate: findings.congrRnd // нужно ли его отправлять? мне его получить надо
+                }
+            },
+            success: function (data) {
+
+                data = JSON.parse(data);
+                if (data.result === "OK") {
+                    congratulate.data = data.rnd;
+                } else {
+                    console.log("ERROR_GET_CONGRATULATE");
+                }
+            }
         });
     }
 
@@ -213,12 +296,14 @@ class Congratulate {
 
 
 
+
     init() {
         this.congratulateSomeone();
         this.subjectCongratulations();
         this._requestCongratulate();
+
     }
 }
 
 let congratulate = new Congratulate();
-congratulate.init();
+
