@@ -12,7 +12,7 @@ let findings = {
 const renderFirst = `
 <p class="main-block-data-menu">Ваша случайность из категории:<span class="cat-sel">Поздравления</span><span class="cat-settings" onclick="rendGo();" style="cursor: pointer;">Настроить фильтр</span><span class="next-random" onclick="firstRnd();" style="cursor: pointer;">Следующая случайность</span></p>
         <div class="main-block-data-primary"></div>
-        <div class="congratulate_text"></div>
+        <div class="congratulate_text" style="min-height: 400px;"></div>
         <div class="other-cat">Кроме поздравлений наш генератор выдаёт варианты из <a href="#" class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text">Исторический факт</a>&raquo;</div>        
         `;
 
@@ -64,7 +64,7 @@ const renderGo = `
                 }
                 
                 .congratulate_them {
-                    width: 10%;
+                    width: 20%;
                     min-height: 400px;
                 }
                 
@@ -75,16 +75,16 @@ const renderGo = `
                     flex-direction: column;
                     flex-wrap: nowrap;
                     justify-content: flex-start;
-                    width: 25%;
+                    width: 100%;
                 }
                 
                 .comgratulate_text {
-                    width: 45%;                    
+                    width: 45%;                                                   
                 }
                 
                 .who,
                 .congr {
-                    width: 150px;
+                    width: 200px;
                     height: 30px;
                     margin: 10px;
                     text-align: left;
@@ -117,16 +117,11 @@ const renderGo = `
 `;
 
 //грузим модуль в дивы
+let btnGo = document.querySelector('.btn_go'); // кнопка пуска, загрузки, старта в пробном варианте
 let congratulateLink = document.querySelector('.data-title-link');
 let congratulateLinkMain = document.querySelector('.congratulate_main_lnk');
-let btnGo = document.querySelector('.btn_go'); // кнопка пуска, загрузки, старта в пробном варианте
-if (congratulateLink) {
-    runProgr(congratulateLink);
-} else if (congratulateLinkMain) {
-    runProgr(congratulateLinkMain);
-} else if (btnGo) {
-    runProgr(btnGo);
-}
+runProgr(btnGo);
+
 //грузим модуль Первая загрузка со случайным поздравлением
 function runProgr(event) {
     let mainBlock = document.querySelector('.main-block-data');//место вставки
