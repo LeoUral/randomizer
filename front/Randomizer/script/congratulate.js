@@ -116,6 +116,10 @@ const renderGo = `
         <div class="other-cat">Кроме поздравлений наш генератор выдаёт варианты из <a href="#" class="link-in-text">других категорий</a>, например, &laquo;<a href="#" class="link-in-text">Исторический факт</a>&raquo;</div>
 `;
 
+//Изменим цвет фона для совего блока
+let colorMain = document.querySelector('.main-block');
+colorMain.classList.add('main-color-2');
+
 //грузим модуль в дивы
 let btnGo = document.querySelector('.btn_go'); // кнопка пуска, загрузки, старта в пробном варианте
 let congratulateLink = document.querySelector('.data-title-link');
@@ -128,7 +132,7 @@ function runProgr(event) {
     event.addEventListener('click', function () {
         mainBlock.innerHTML = renderFirst;
         congratulate.init();
-        setTimeout(firstRnd, 500);//время задержки, что бы успел выполниться callback у запроса
+        setTimeout(firstRnd, 500);//время задержки, что бы успел выполниться callback у запроса fetch
     });
 };
 
